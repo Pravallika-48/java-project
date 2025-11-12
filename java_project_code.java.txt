@@ -1,0 +1,75 @@
+Program Code: 
+ 
+ 
+import java.util.Scanner; 
+import java.util.regex.*; 
+ 
+public class PasswordStrengthAnalyzer { 
+ 
+    // Function to check password strength 
+    public static String checkStrength(String password) { 
+        int strengthPoints = 0; 
+ 
+        // Criteria 1: Length 
+        if (password.length() >= 8) 
+            strengthPoints++; 
+ 
+        // Criteria 2: Contains lowercase letters 
+        if (password.matches(".*[a-z].*")) 
+            strengthPoints++; 
+ 
+        // Criteria 3: Contains uppercase letters 
+        if (password.matches(".*[A-Z].*")) 
+            strengthPoints++; 
+ 
+        // Criteria 4: Contains digits 
+        if (password.matches(".*[0-9].*")) 
+            strengthPoints++; 
+ 
+        // Criteria 5: Contains special characters 
+        if (password.matches(".*[!@#$%^&*(),.?\":{}|<>].*")) 
+            strengthPoints++; 
+ 
+        // Strength evaluation 
+        if (strengthPoints <= 2) 
+            return "Weak"; 
+        else if (strengthPoints == 3 || strengthPoints == 4) 
+            return "Medium"; 
+        else 
+            return "Strong"; 
+    } 
+ 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        String password; 
+        char choice; 
+ 
+        System.out.println("=== Password Strength Analyzer 
+==="); 
+ 
+        do { 
+            System.out.print("\nEnter a password to analyze: "); 
+            password = sc.nextLine(); 
+ 
+            String strength = checkStrength(password); 
+            System.out.println("Password Strength: " + strength); 
+ 
+            if (strength.equals("Weak")) { 
+                System.out.println("Tips to improve your password:"); 
+                System.out.println("- Use at least 8 characters"); 
+                System.out.println("- Add uppercase, lowercase, 
+digits, and symbols"); 
+            } 
+ 
+            System.out.print("\nDo you want to check another 
+password? (y/n): "); 
+            choice = sc.next().charAt(0); 
+            sc.nextLine(); // clear buffer 
+ 
+        } while (choice == 'y' || choice == 'Y'); 
+ 
+        System.out.println("\nExiting Password Analyzer... Stay 
+Secure!"); 
+        sc.close(); 
+    } 
+}
